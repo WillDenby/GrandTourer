@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "GrandTourer"
+version = "0.1.0"
+description = ""
+authors = ["WillDenby <119456795+WillDenby@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+click = "^8.1.7"
+
+[tool.poetry.scripts]
+gt = "grandtourer.cli:app"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
