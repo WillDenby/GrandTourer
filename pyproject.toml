@@ -1,9 +1,10 @@
 [tool.poetry]
 name = "GrandTourer"
-version = "0.1.1"
+version = "0.1.2"
 description = "GrandTourer is a CLI tool for easily launching applications on MacOS with a two letter command: gt"
 authors = ["WillDenby <119456795+WillDenby@users.noreply.github.com>"]
 readme = "README.md"
+repository = "https://github.com/WillDenby/GrandTourer"
 
 [tool.poetry.dependencies]
 python = "^3.8"
