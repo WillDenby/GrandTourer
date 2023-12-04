@@ -1,6 +1,6 @@
 # GrandTourer
 
-GrandTourer is a CLI tool for easily launching applications on MacOS with a two letter command: ```gt```. It's a drop-in replacement for ```open -a``` - with fuzzy string matching.
+GrandTourer is a CLI tool for easily launching applications on MacOS with a two letter command: ```gt```. It's a drop-in replacement for ```open -a``` - with string matching.
 
 ## Installation
 

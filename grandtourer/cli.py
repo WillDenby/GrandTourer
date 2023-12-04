@@ -38,6 +38,12 @@ def open_application(application_name):
 @click.command(options_metavar='')
 @click.argument('application', metavar='APPLICATION...', nargs=-1)
 def app(application):
+    """Launches your APPLICATION.
+
+    You only need to enter the first few letters. 
+    Don't worry about capitals or spaces. 
+    String matching will find your application.
+    """
 
     applications_dict = get_applications_dict()
 
