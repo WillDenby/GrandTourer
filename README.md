@@ -4,7 +4,7 @@ GrandTourer is a CLI tool for easily launching applications on MacOS with a two 
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install GrandTourer.
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install GrandTourer. GrandTourer requires Python >=3.8.
 
 ```bash
 pip install grandtourer
@@ -31,4 +31,4 @@ calendar
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+Made by [Will](https://github.com/WillDenby) and released under the [MIT](https://choosealicense.com/licenses/mit/) License

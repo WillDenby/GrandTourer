@@ -12,11 +12,19 @@ def get_applications_dict():
         key = app_name.replace(" ", "").replace(".app", "").lower()
         value = app_name.replace(".app", "")
         applications_dict[key] = value
-
+    
     # List applications in the /System/Applications folder
     system_applications_folder = "/System/Applications"
     system_applications_list = os.listdir(system_applications_folder)
     for app_name in system_applications_list:
+        key = app_name.replace(" ", "").replace(".app", "").lower()
+        value = app_name.replace(".app", "")
+        applications_dict[key] = value
+
+    # List applications in the /System/Applications/Utilities folder
+    system_applications_utilities_folder = "/System/Applications/Utilities"
+    system_applications_utilities_list = os.listdir(system_applications_utilities_folder)
+    for app_name in system_applications_utilities_list:
         key = app_name.replace(" ", "").replace(".app", "").lower()
         value = app_name.replace(".app", "")
         applications_dict[key] = value
