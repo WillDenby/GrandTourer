@@ -3,33 +3,34 @@ import os
 import subprocess
 
 def get_applications_dict():
+
     applications_dict = {}
+    common_first_words = []
+    folders = ["/Applications", "/System/Applications", "/System/Applications/Utilities"]
 
-    # List applications in the /Applications folder
-    applications_folder = "/Applications"
-    applications_list = os.listdir(applications_folder)
-    for app_name in applications_list:
-        key = app_name.replace(" ", "").replace(".app", "").lower()
-        value = app_name.replace(".app", "")
-        applications_dict[key] = value
-    
-    # List applications in the /System/Applications folder
-    system_applications_folder = "/System/Applications"
-    system_applications_list = os.listdir(system_applications_folder)
-    for app_name in system_applications_list:
-        key = app_name.replace(" ", "").replace(".app", "").lower()
-        value = app_name.replace(".app", "")
-        applications_dict[key] = value
+    for folder in folders:
+        applications_list = os.listdir(folder)
 
-    # List applications in the /System/Applications/Utilities folder
-    system_applications_utilities_folder = "/System/Applications/Utilities"
-    system_applications_utilities_list = os.listdir(system_applications_utilities_folder)
-    for app_name in system_applications_utilities_list:
-        key = app_name.replace(" ", "").replace(".app", "").lower()
-        value = app_name.replace(".app", "")
-        applications_dict[key] = value
+        first_words = [app.split()[0] for app in applications_list]
+        for word in first_words:
+            if first_words.count(word) > 1 and word not in common_first_words:
+                common_first_words.append(word)
 
-    return applications_dict
+        for app_name in applications_list:
+            key = app_name.replace(" ", "").replace(".app", "").lower()
+            value = app_name.replace(".app", "")
+            applications_dict[key] = value
+
+    cleaned_dict = {}
+    for original_key, value in applications_dict.items():
+        key = original_key
+        for word in common_first_words:
+            if key.lower().startswith(word.lower()):
+                key = key[len(word):].lstrip()
+                break  # Break once the first common word is removed
+        cleaned_dict[key] = value
+
+    return cleaned_dict
 
 def filter_dict_by_prefix(applications_dict, prefix):
     filtered_dict = {key: value for key, value in applications_dict.items() if key.startswith(prefix)}
@@ -66,9 +67,10 @@ def app(application):
         click.echo("No apps found")
     else:
         click.echo("Did you mean one of the following?")
-        for value in result.keys():
+        for value in result.values():
             click.echo(value)
 
 if __name__ == '__main__':
     app()
+
 
