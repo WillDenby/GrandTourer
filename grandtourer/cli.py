@@ -27,10 +27,12 @@ def get_applications_dict():
         for word in common_first_words:
             if key.lower().startswith(word.lower()):
                 key = key[len(word):].lstrip()
-                break  # Break once the first common word is removed
+                break  
         cleaned_dict[key] = value
 
-    return cleaned_dict
+    applications_dict.update(cleaned_dict)
+    
+    return applications_dict
 
 def filter_dict_by_prefix(applications_dict, prefix):
     filtered_dict = {key: value for key, value in applications_dict.items() if key.startswith(prefix)}
@@ -38,7 +40,6 @@ def filter_dict_by_prefix(applications_dict, prefix):
 
 def open_application(application_name):
     try:
-        # Use the subprocess module to run the open command
         subprocess.run(['open', '-a', application_name], check=True)
     except subprocess.CalledProcessError as e:
         click.echo(f"Error opening application: {application_name}")
@@ -51,6 +52,7 @@ def app(application):
 
     You only need to enter the first few letters. 
     Don't worry about capitals or spaces. 
+    You can also miss out common first words like "Microsoft" or "Adobe".
     String matching will find your application.
     """
 
@@ -67,8 +69,17 @@ def app(application):
         click.echo("No apps found")
     else:
         click.echo("Did you mean one of the following?")
-        for value in result.values():
-            click.echo(value)
+        options = list(result.values())
+        for i, value in enumerate(options, start=1):
+            click.echo(f"{i}. {value}")
+
+        selected_option = click.prompt("Enter the number you want. Enter any other number to exit", type=int)
+
+        if 1 <= selected_option <= len(options):
+            open_application(options[selected_option - 1])
+
+        else:
+            click.echo("Hmm, that wasn't one of the options!")
 
 if __name__ == '__main__':
     app()
